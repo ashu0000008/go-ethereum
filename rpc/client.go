@@ -22,6 +22,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/http"
 	"net/url"
 	"reflect"
 	"strconv"
@@ -174,6 +175,25 @@ func DialContext(ctx context.Context, rawurl string) (*Client, error) {
 	switch u.Scheme {
 	case "http", "https":
 		return DialHTTP(rawurl)
+	case "ws", "wss":
+		return DialWebsocket(ctx, rawurl, "")
+	case "stdio":
+		return DialStdIO(ctx)
+	case "":
+		return DialIPC(ctx, rawurl)
+	default:
+		return nil, fmt.Errorf("no known transport for URL scheme %q", u.Scheme)
+	}
+}
+
+func DialContext2(ctx context.Context, rawurl string, httpClient *http.Client) (*Client, error) {
+	u, err := url.Parse(rawurl)
+	if err != nil {
+		return nil, err
+	}
+	switch u.Scheme {
+	case "http", "https":
+		return DialHTTPWithClient(rawurl, httpClient)
 	case "ws", "wss":
 		return DialWebsocket(ctx, rawurl, "")
 	case "stdio":

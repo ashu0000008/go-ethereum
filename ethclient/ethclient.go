@@ -23,6 +23,7 @@ import (
 	"errors"
 	"fmt"
 	"math/big"
+	"net/http"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -43,6 +44,14 @@ func Dial(rawurl string) (*Client, error) {
 
 func DialContext(ctx context.Context, rawurl string) (*Client, error) {
 	c, err := rpc.DialContext(ctx, rawurl)
+	if err != nil {
+		return nil, err
+	}
+	return NewClient(c), nil
+}
+
+func DialContext2(ctx context.Context, rawurl string, httpClient *http.Client) (*Client, error) {
+	c, err := rpc.DialContext2(ctx, rawurl, httpClient)
 	if err != nil {
 		return nil, err
 	}
