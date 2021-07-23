@@ -1,9 +1,8 @@
-module github.com/ashu0000008/go-ethereum
+module github.com/ethereum/go-ethereum
 
 go 1.15
 
 require (
-	github.com/ethereum/go-ethereum v1.10.6
 	github.com/Azure/azure-pipeline-go v0.2.2 // indirect
 	github.com/Azure/azure-storage-blob-go v0.7.0
 	github.com/Azure/go-autorest/autorest/adal v0.8.0 // indirect
