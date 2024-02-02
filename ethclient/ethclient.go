@@ -15,6 +15,17 @@
 // along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
 
 // Package ethclient provides a client for the Ethereum RPC API.
+
+/*
+ * ===========================================================================================
+ * Revision History:
+ * Date                         Author                        Action
+ * 2021/07/23                   Peter                         Modify
+ *Revised content:
+ *1.Supported custom httpClient, when connecting to nodes.
+ * ===========================================================================================
+ */
+
 package ethclient
 
 import (
@@ -24,8 +35,8 @@ import (
 	"fmt"
 	"math/big"
 	"net/http"
+	"repo.paxengine.com.cn/eagle/go-ethereum"
 
-	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
